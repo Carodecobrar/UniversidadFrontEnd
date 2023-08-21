@@ -16,6 +16,10 @@
                 <th mat-header-cell *matHeaderCellDef>Nombre del programa</th>
                 <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
             </ng-container>
+            <ng-container matColumnDef="Créditos">
+                <th mat-header-cell *matHeaderCellDef>Créditos</th>
+                <td mat-cell *matCellDef="let element"> {{element.creditos}} </td>
+            </ng-container>
             <ng-container matColumnDef="Materias">
                 <th mat-header-cell *matHeaderCellDef>Materias</th>
                 <td mat-cell *matCellDef="let element"> 

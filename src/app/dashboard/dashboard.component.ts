@@ -20,9 +20,10 @@ export class DashboardComponent implements OnInit {
   programa!: any;
   inscripciones!: any[];
   asignaturas!: any[];
-  programas!: Programa[];
+  programas!: any[];
+  materias!: any[];
   programaForm!: FormGroup;
-  columnasTablaProgramas = ['Nombre', 'Materias'];
+  columnasTablaProgramas = ['Nombre', 'Créditos', 'Materias'];
   constructor(
     private router: Router,
     private programService: ProgramService,
@@ -38,6 +39,9 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem("token") == null) {
       this.router.navigate(['']);
     }
+    this.refreshData();
+  }
+  refreshData(){
     this.user = JSON.parse(localStorage.getItem("user") + "");
     this.role = JSON.parse(localStorage.getItem("role") + "");
     this.programa = JSON.parse(localStorage.getItem("programa") + "");
@@ -47,6 +51,22 @@ export class DashboardComponent implements OnInit {
       next: result => {
         this.programas = result.data;
         console.log(this.programas);
+        this.materiasService.getMateriasByUsuario(this.user.idUsuario).subscribe({
+          next: result => {
+            this.materias = result.data;
+            this.programas.forEach(p => {
+              this.materias.forEach(m => {
+                if (p.idPrograma == m.idPrograma){
+                  p.creditos += m.creditos;
+                }
+              });
+            });
+            console.log(this.materias);
+          },
+          error: result => {
+            console.log(result);
+          }
+        });
       },
       error: result => {
         console.log(result);
@@ -61,6 +81,7 @@ export class DashboardComponent implements OnInit {
     this.userService.ChooseMateria(this.user.idUsuario, this.role.idRol, row, element).subscribe({
       next: result => {
         console.log(result);
+        this.refreshData();
       },
       error: result => {
         console.log(result);

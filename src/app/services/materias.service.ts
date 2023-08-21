@@ -10,7 +10,7 @@ export class MateriasService {
   controller = `${environment.api}/Materias/`;
   constructor(private http: HttpClient) { }
 
-  getAllMaterias() {
-    return this.http.get<Response<any>>(this.controller);
+  getMateriasByUsuario(idUsuario:number) {
+    return this.http.get<Response<any>>(this.controller+'getMateriasByUsuario?idUsuario='+idUsuario);
   }
 }
