@@ -20,6 +20,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
+import { StudentsComponent } from './students/students.component';
+import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import {MatDividerModule} from '@angular/material/divider';
     HomeComponent,
     RegisterDialogComponent,
     LoginDialogComponent,
-    DashboardComponent
+    DashboardComponent,
+    StudentsComponent,
+    UserDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

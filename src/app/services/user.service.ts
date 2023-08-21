@@ -34,4 +34,19 @@ export class UserService {
     };
     return this.http.post<Response<User>>(this.controller+'chooseMateria',params);
   }
+  GetStudentsData(idusuario:number, idRole:number) {
+    let params : RequestParams = {
+      IdUsuario: idusuario,
+      IdRol: idRole
+    };
+    return this.http.post<Response<any>>(this.controller+'GetStudentsData',params);
+  }
+  Update(idUsuario: number, result: any) {
+    let params : RequestParams = {
+      IdUsuario: idUsuario,
+      Correo: result.Correo,
+      Clave: result.Clave
+    };
+    return this.http.put<Response<any>>(this.controller,params);
+  }
 }

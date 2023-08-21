@@ -3,10 +3,14 @@
         {{role.nombre}}
         {{user.nombreCompleto}}
         <span class="spacer"></span>
+        <a (click)="showProfile()">Perfil</a>
+        <span class="spacer"></span>
+        <a (click)="showStudents()">Estudiantes</a>
+        <span class="spacer"></span>
         <a (click)="logout()">Cerrar sesión</a>
     </mat-toolbar-row>
 </mat-toolbar>
-<mat-card *ngIf="(role.idRol == 1 && inscripciones.length < 3) || (role.idRole == 2 && asignaturas.length < 2)">
+<mat-card *ngIf="(role.idRol == 1 && inscripciones.length < 3) || (role.idRol == 2 && asignaturas.length < 2)">
     <mat-card-header>
         Seleccione una materia
     </mat-card-header>
@@ -33,16 +37,4 @@
             <tr mat-row *matRowDef="let myRowData; columns: columnasTablaProgramas"></tr>
         </table>
     </mat-card-content>
-</mat-card>
-<!-- Estudiante sin materias por escoger -->
-<mat-card *ngIf="user.IdPrograma != null && (role.IdRol == 1 && inscripciones.length < 3)">
-    <mat-card-header>
-        Materias disponibles
-    </mat-card-header>
-</mat-card>
-<!-- Profesor sin materias por escoger -->
-<mat-card *ngIf="user.IdPrograma != null && (role.IdRol == 2 && asignaturas.length < 3)">
-    <mat-card-header>
-        Materias disponibles
-    </mat-card-header>
 </mat-card>

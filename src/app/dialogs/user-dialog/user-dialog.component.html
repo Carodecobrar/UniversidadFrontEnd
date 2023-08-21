@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        Datos del usuario
+    </mat-toolbar-row>
+</mat-toolbar>
+<form [formGroup]="userForm">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input type="text" matInput formControlName="contraseña">
+    </mat-form-field>
+    <button (click)="update()">Actualizar</button>
+</form>

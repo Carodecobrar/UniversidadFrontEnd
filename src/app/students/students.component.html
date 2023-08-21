@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        {{role.nombre}}
+        {{user.nombreCompleto}}
+        <span class="spacer"></span>
+        <a (click)="dashboard()">Inicio</a>
+        <span class="spacer"></span>
+        <a (click)="logout()">Cerrar sesión</a>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+    <mat-card-header>
+        <p *ngIf="role.IdRol == 1">Compañeros de estudio</p>
+        <p *ngIf="role.IdRol == 2">Estudiantes y sus materias</p>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="estudiantes">
+            <ng-container matColumnDef="Nombre Completo">
+                <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Correo">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Materias">
+                <th mat-header-cell *matHeaderCellDef>Materias</th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-select>
+                        <mat-option *ngFor="let materia of element.materias" [value]="materia.idMateria">{{materia.nombre}}</mat-option>
+                    </mat-select>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnasTablaEstudiantes"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnasTablaEstudiantes"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

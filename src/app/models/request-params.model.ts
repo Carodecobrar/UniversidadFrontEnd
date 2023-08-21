@@ -5,5 +5,7 @@ export interface RequestParams{
     IdUsuario?: number,
     IdRol?: number,
     Programa?: Programa,
-    Materia?: Materia
+    Materia?: Materia,
+    Correo?: string,
+    Clave?: string
 }

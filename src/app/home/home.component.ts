@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { UserRole } from '../models/user-role.model';
 import { LoginDialogComponent } from '../dialogs/login-dialog/login-dialog.component';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
             console.log(loginResult);
           },
           error: errorResult => {
+            this.dialogService.open(ConfirmDialogComponent, {data:errorResult.message});
             console.log(errorResult);
           }
         });
