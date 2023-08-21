@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
               localStorage.setItem("token", loginResult.data.token);
               localStorage.setItem("user", JSON.stringify(loginResult.data.user));
               localStorage.setItem("role", JSON.stringify(loginResult.data.role));
-              localStorage.setItem("programa", JSON.stringify(loginResult.data.programa));
-              localStorage.setItem("materias", JSON.stringify(loginResult.data.materias));
+              localStorage.setItem("inscripciones", JSON.stringify(loginResult.data.inscripciones));
+              localStorage.setItem("asignaturas", JSON.stringify(loginResult.data.asignaturas));
               this.router.navigate(['dashboard']);
             }
             console.log(loginResult);

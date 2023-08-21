@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
   user!: any;
   role!: any;
   programa!: any;
-  inscripciones!: any;
-  asignaturas!: any;
+  inscripciones!: any[];
+  asignaturas!: any[];
   programas!: Programa[];
   programaForm!: FormGroup;
   columnasTablaProgramas = ['Nombre', 'Materias'];

@@ -6,9 +6,9 @@
         <a (click)="logout()">Cerrar sesión</a>
     </mat-toolbar-row>
 </mat-toolbar>
-<mat-card *ngIf="user.IdPrograma == null">
+<mat-card *ngIf="(role.idRol == 1 && inscripciones.length < 3) || (role.idRole == 2 && asignaturas.length < 2)">
     <mat-card-header>
-        Seleccione un programa
+        Seleccione una materia
     </mat-card-header>
     <mat-card-content [formGroup]="programaForm">
         <table mat-table [dataSource]="programas">
@@ -20,6 +20,7 @@
                 <th mat-header-cell *matHeaderCellDef>Materias</th>
                 <td mat-cell *matCellDef="let element"> 
                     <mat-select formControlName="idMateria">
+                        <mat-option value="">Seleccione una materia</mat-option>
                         <mat-option *ngFor="let materia of element.materias" [value]="materia.idMateria" (click)="chooseMateria(materia, element)">{{materia.nombre}}</mat-option>
                     </mat-select>
                 </td>
