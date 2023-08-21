@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
               localStorage.setItem("inscripciones", JSON.stringify(loginResult.data.inscripciones));
               localStorage.setItem("asignaturas", JSON.stringify(loginResult.data.asignaturas));
               this.router.navigate(['dashboard']);
+              this.dialogService.open(ConfirmDialogComponent, {data:loginResult.message});
             }
             console.log(loginResult);
           },
@@ -71,6 +72,7 @@ export class HomeComponent implements OnInit {
               };
               this.userService.AssignRoleToUser(newUserRole).subscribe({
                 next: assignResponse => {
+                  this.dialogService.open(ConfirmDialogComponent, {data:assignResponse.message});
                   console.log(assignResponse);
                 },
                 error: assignResponse => {
