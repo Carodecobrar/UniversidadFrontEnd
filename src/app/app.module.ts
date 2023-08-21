@@ -13,15 +13,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpInterceptorService } from './services/http-interceptor.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +40,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatOptionModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

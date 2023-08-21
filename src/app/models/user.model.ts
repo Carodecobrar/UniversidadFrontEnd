@@ -3,10 +3,12 @@ export interface User{
     Cedula: string,
     Nombres: string,
     Apellidos: string,
+    NombreCompleto: string,
     FechaDeNacimientoText: string,
     FechaNacimiento: Date,
     Sexo: string,
     Correo: string,
     Clave: string,
-    IdRol: number
+    IdRol: number,
+    IdPrograma?: number
 }

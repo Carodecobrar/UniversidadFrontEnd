@@ -30,7 +30,7 @@ export class RegisterDialogComponent {
   createUser(){
     if (this.registerForm.valid){
       let newUser : User = {
-        Cedula: this.registerForm.get('cedula')!.value+'',
+        Cedula: this.registerForm.get('cedula')!.value + '',
         Nombres: this.registerForm.get('nombres')!.value,
         Apellidos: this.registerForm.get('apellidos')!.value,
         FechaDeNacimientoText: this.registerForm.get('fechaNacimiento')!.value,
@@ -39,12 +39,14 @@ export class RegisterDialogComponent {
         Correo: this.registerForm.get('email')!.value,
         Clave: this.registerForm.get('contraseña')!.value,
         IdRol: parseInt(this.registerForm.get('idRol')!.value),
+        NombreCompleto: ''
       };
       this.dialogRef.close(newUser);
     } else{
       Object.keys(this.registerForm.controls).forEach(key => {
         if (this.registerForm.get(key) != null){
-          this.registerForm.get(key)!.markAsTouched();
+          if (!this.registerForm.get(key)?.valid)
+            this.registerForm.get(key)!.markAsTouched();
         }
       });
     }

@@ -3,14 +3,14 @@
         Iniciar sesión
     </mat-toolbar-row>
 </mat-toolbar>
-<form>
+<form [formGroup]="loginForm">
     <mat-form-field>
         <mat-label>Email</mat-label>
-        <input type="number" matInput>
+        <input type="email" matInput formControlName="email">
     </mat-form-field>
     <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput formControlName="contraseña">
     </mat-form-field>
     <button (click)="login()"></button>
 </form>

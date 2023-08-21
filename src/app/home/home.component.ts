@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RegisterDialogComponent } from '../dialogs/register-dialog/register-dialog.component';
 import { UserService } from '../services/user.service';
 import { UserRole } from '../models/user-role.model';
+import { LoginDialogComponent } from '../dialogs/login-dialog/login-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +13,13 @@ import { UserRole } from '../models/user-role.model';
 })
 export class HomeComponent implements OnInit {
   private registerDialogRef: MatDialogRef<any> | undefined;
+  private loginDialogRef: MatDialogRef<any>| undefined;
   idNewUserRole!: number;
 
   constructor(
     private dialogService: MatDialog,
-    private userService: UserService) {
+    private userService: UserService,
+    private router: Router) {
     
   }
 
@@ -24,7 +28,28 @@ export class HomeComponent implements OnInit {
   }
 
   login(){
-
+    this.loginDialogRef = this.dialogService.open(LoginDialogComponent);
+    this.loginDialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result){
+        this.userService.Login(result).subscribe({
+          next: loginResult => {
+            if (loginResult.statusCode == 200){
+              localStorage.setItem("token", loginResult.data.token);
+              localStorage.setItem("user", JSON.stringify(loginResult.data.user));
+              localStorage.setItem("role", JSON.stringify(loginResult.data.role));
+              localStorage.setItem("programa", JSON.stringify(loginResult.data.programa));
+              localStorage.setItem("materias", JSON.stringify(loginResult.data.materias));
+              this.router.navigate(['dashboard']);
+            }
+            console.log(loginResult);
+          },
+          error: errorResult => {
+            console.log(errorResult);
+          }
+        });
+      }
+    });
   }
 
   register(){
